@@ -79,7 +79,8 @@ def DisplayMenu():
 
 def GetMenuChoice():
   Choice = input()
-  print()
+  Choice=Choice.upper()
+  print('')
   return Choice
 
 def LoadDeck(Deck):
