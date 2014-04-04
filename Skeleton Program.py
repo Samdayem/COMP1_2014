@@ -4,7 +4,7 @@
 # developed in the Python 3.2 programming environment
 # version 2 edited 06/03/2014
 
-######test change#############
+############test change#############
 
 import random
 
@@ -78,8 +78,8 @@ def DisplayMenu():
   print('Select an option from the menu (or enter q to quit): ', end='')
 
 def GetMenuChoice():
-  Choice = input()
-  Choice=Choice.upper()
+  Choice = input().lower()
+  Choice= Choice[0]
   print('')
   return Choice
 
@@ -130,13 +130,14 @@ def IsNextCardHigher(LastCard, NextCard):
   return Higher
 
 def GetPlayerName():
-  print()
   PlayerName = input('Please enter your name: ')
-  print()
+  while PlayerName != str or input != int: 
+    print()
   return PlayerName
 
 def GetChoiceFromUser():
-  Choice = input('Do you think the next card will be higher than the last card (enter y or n)? ')
+  Choice = input('Do you think the next card will be higher than the last card (enter y or n)? ').lower()
+  Choice=Choice[0]
   return Choice
 
 def DisplayEndOfGameMessage(Score):
