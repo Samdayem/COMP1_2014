@@ -21,7 +21,7 @@ class TRecentScore():
   def __init__(self):
     self.Name = ''
     self.Score = 0
-    self.date=None
+    self.Date=None
 
 Deck = [None]
 RecentScores = [None]
@@ -77,8 +77,18 @@ def DisplayMenu():
   print('2. Play game (without shuffle)')
   print('3. Display recent scores')
   print('4. Reset recent scores')
+  print('5. Options')
   print()
   print('Select an option from the menu (or enter q to quit): ', end='')
+
+def DisplayOptions():
+  print('OPTIONS MENU')
+  print()
+  print('1.Set Ace to be high or low')
+  print()
+
+def GetOptionChoice():
+  OptionChoice=int
 
 def GetMenuChoice():
   Choice = input().lower()
