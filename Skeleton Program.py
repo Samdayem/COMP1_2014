@@ -1,3 +1,4 @@
+
 # Skeleton Program code for the AQA COMP1 Summer 2014 examination
 # this code should be used in conjunction with the Preliminary Material
 # written by the AQA Programmer Team
@@ -134,7 +135,7 @@ def IsNextCardHigher(LastCard, NextCard):
 def GetPlayerName():
   print()
   valid=False
-  While not valid:
+  while not valid:
     PlayerName = input('Please enter your name: ')
     if len (PlayerName) >0:
       valid=True
@@ -194,7 +195,7 @@ def UpdateRecentScores(RecentScores, Score):
     if Choice in ['y','n']:
       valid=True
     else:
-      print('please enter a valid choice)
+      print('please enter a valid choice')
   if Choice == 'y':
     PlayerName = GetPlayerName()
     FoundSpace = False
