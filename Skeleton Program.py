@@ -88,14 +88,32 @@ def DisplayOptions():
   print()
 
 def GetOptionChoice():
-  OptionChoice=int
-
+  OptionChoice=input('Select an option from the menu (or enter q to quit): ').lower()
+  OptionChoice=OptionChoice[0]
+  return OptionChoice
+  
 def GetMenuChoice():
   Choice = input().lower()
   Choice= Choice[0]
   print('')
   return Choice
 
+def SetOptions(OptionChoice):
+  Valid=False
+  if OptionChoice==1:
+    SetAceHighOrLow()
+    Valid=True
+  elif OptionChoice=='q':
+    Valid=True
+  else:
+    print('Please enter a correct option choice (or enter q to quit): ')
+    Valid=False
+
+def SetAceHighOrLow():
+  AceRank=('Do you want the Ace to be (h)igh or (l)ow? ').lower()
+  AceRank=AceRank[0]
+  
+  
 def LoadDeck(Deck):
   CurrentFile = open('deck.txt', 'r')
   Count = 1
@@ -272,3 +290,7 @@ if __name__ == '__main__':
       DisplayRecentScores(RecentScores)
     elif Choice == '4':
       ResetRecentScores(RecentScores)
+    elif Choice == '5':
+      DisplayOptions()
+      OptionChoice=GetOptionChoice()
+      SetOptions(OptionChoice)
