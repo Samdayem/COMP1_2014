@@ -14,6 +14,16 @@ def __init__(self)  def GetChoiceFromUser    def DisplayRecentScores
  ('%d/%m/%Y')
 8- Describe each variable role in your own words with examples.
 fixed value-- holds a value that doesn't change, eg: NO_OF_RECENT_SCORES = 3
+stepper-- goes through a number of predicted values
+most recent holder-- stores the latest value in a process
+most wanted holder-- stores the most appropriate value for the program
+gatherer-- stores the total of values so far
+transformation-- gets its value from other variables
+follower-- the value of this is one of another one's old one
+temporary-- holds value for a short time
+9-difference between passing by value and passing by reference.
+the variable uses a reference to the same memory location and is passed as a parameter 
+the value is copied to the parameter.
 
 
 
