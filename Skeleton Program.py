@@ -101,7 +101,7 @@ def GetOptionChoice():
 
 def SetOptions(OptionChoice):
   Valid=False
-  if OptionChoice==1:
+  if OptionChoice=='1':
     SetAceHighOrLow()
     Valid=True
   elif OptionChoice=='q':
@@ -111,11 +111,27 @@ def SetOptions(OptionChoice):
 
 def SetAceHighOrLow():
   global AceRank
-  HighOrLow=('Do you want the Ace to be (h)igh or (l)ow? ')
+  HighOrLow=input('Do you want the Ace to be (h)igh or (l)ow? ').lower()
+  HighOrLow= HighOrLow[0]
   if HighOrLow == 'h':
     AceRank=True
   elif HighOrLow == 'l':
     AceRank=False
+  print(AceRank)
+
+
+def BubbleSortScores(RecentScores):
+  unsorted=True
+  length= len(RecentScores) -1
+  while unsorted:
+    unsorted=False
+    for element in range(len(RecentScores)):
+      if RecentScores[count]>RecentScores[count+1]:
+        temp=RecentScores[count+1]
+        RecentScores[count+1]=RecentScores[count]
+        RecentScores[count]=temp
+      else:
+        unsorted=True
     
       
       
@@ -282,6 +298,7 @@ if __name__ == '__main__':
   for Count in range(1, 53):
     Deck.append(TCard())
   for Count in range(1, NO_OF_RECENT_SCORES + 1):
+
     RecentScores.append(TRecentScore())
   Choice = ''
   while Choice != 'q':
@@ -296,6 +313,7 @@ if __name__ == '__main__':
       PlayGame(Deck, RecentScores)
     elif Choice == '3':
       DisplayRecentScores(RecentScores)
+      BubbleSortScores(RecentScores)
     elif Choice == '4':
       ResetRecentScores(RecentScores)
     elif Choice == '5':
