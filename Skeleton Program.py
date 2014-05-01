@@ -118,20 +118,34 @@ def SetAceHighOrLow():
   elif HighOrLow == 'l':
     AceRank=False
   print(AceRank)
+  
 
 
 def BubbleSortScores(RecentScores):
-  unsorted=True
-  length= len(RecentScores) -1
-  while unsorted:
-    unsorted=False
+  sorted=False
+  length=len(RecentScores) -1
+  while not sorted:
+    sorted=True
     for element in range(len(RecentScores)):
-      if RecentScores[count]>RecentScores[count+1]:
+      if RecentScores[element]>RecentScores[element+1]:
+        sorted=False
         temp=RecentScores[count+1]
-        RecentScores[count+1]=RecentScores[count]
-        RecentScores[count]=temp
-      else:
-        unsorted=True
+        RecentScores[element+1]=RecentScores[element]
+        RecentScores[element]=temp
+        
+      
+##  unsorted=True
+##  length= len(RecentScores) -1
+##  while unsorted:
+##    for element in range(len(RecentScores)):
+##      unsorted=False
+##      if RecentScores[count]>RecentScores[count+1]:
+##        temp=RecentScores[count+1]
+##        RecentScores[count+1]=RecentScores[count]
+##        RecentScores[count]= temp
+##        print RecentScores              
+##      else:
+##        unsorted=True
     
       
       
