@@ -10,6 +10,7 @@
 import random
 from datetime import date
 
+
 NO_OF_RECENT_SCORES = 3
 
 class TCard():
@@ -79,6 +80,7 @@ def DisplayMenu():
   print('3. Display recent scores')
   print('4. Reset recent scores')
   print('5. Options')
+  print('6. Save high scores')
   print()
   print('Select an option from the menu (or enter q to quit): ', end='')
 
@@ -93,7 +95,15 @@ def GetMenuChoice():
   Choice = input().lower()
   Choice= Choice[0]
   print('')
+  
   return Choice
+
+
+def SaveScores(RecentScores):
+  with open('save_scores.txt',mode='wb')as my_file:
+    RecentScores=[]
+    `my_file.write(RecentScores)
+
 
 def GetOptionChoice():
   OptionChoice=input('Select an option from the menu (or enter q to quit): ')
@@ -122,16 +132,16 @@ def SetAceHighOrLow():
 
 
 def BubbleSortScores(RecentScores):
-  sorted=False
-  length=len(RecentScores) -1
-  while not sorted:
-    sorted=True
-    for element in range(len(RecentScores)):
-      if RecentScores[element]>RecentScores[element+1]:
-        sorted=False
-        temp=RecentScores[count+1]
-        RecentScores[element+1]=RecentScores[element]
-        RecentScores[element]=temp
+  unsorted=True
+  while unsorted:
+    unsorted=False
+    for element in range(1,len(RecentScores)-1):
+      if RecentScores[element].Score<RecentScores[element+1].Score:
+        unsorted=True
+        temp=RecentScores[element]
+        RecentScores[element]=RecentScores[element+1]
+        RecentScores[element+1]=temp
+  return RecentScores
         
       
 ##  unsorted=True
@@ -326,11 +336,13 @@ if __name__ == '__main__':
       LoadDeck(Deck)
       PlayGame(Deck, RecentScores)
     elif Choice == '3':
-      DisplayRecentScores(RecentScores)
       BubbleSortScores(RecentScores)
+      DisplayRecentScores(RecentScores)
     elif Choice == '4':
       ResetRecentScores(RecentScores)
     elif Choice == '5':
       DisplayOptions()
       OptionChoice=GetOptionChoice()
       SetOptions(OptionChoice)
+    elif Choice == '6':
+      SaveScores(RecentScores)
