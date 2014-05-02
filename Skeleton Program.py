@@ -84,6 +84,27 @@ def DisplayMenu():
   print()
   print('Select an option from the menu (or enter q to quit): ', end='')
 
+  
+def GetMenuChoice():
+  Choice = input().lower()
+  Choice= Choice[0]
+  print('')
+  return Choice
+
+
+def SaveScores(RecentScores,):
+  Count=1
+  with open('save_scores.txt',mode='w', encoding='utf-8')as my_file:
+    for count in range(1,len(RecentScores)):
+      my_file.write(str(RecentScores[count].Date)+"\n")
+      my_file.write(RecentScores[count].Name)+"\n"
+      my_file.write(str(RecentScores[count].Score)+"\n")
+    
+      
+    
+##    for RecentScore in RecentScores:
+##      my_file.write(RecentScores)
+
 def DisplayOptions():
   print('OPTIONS MENU')
   print()
@@ -91,20 +112,6 @@ def DisplayOptions():
   print()
 
   
-def GetMenuChoice():
-  Choice = input().lower()
-  Choice= Choice[0]
-  print('')
-  
-  return Choice
-
-
-def SaveScores(RecentScores):
-  with open('save_scores.txt',mode='wb')as my_file:
-    RecentScores=[]
-    `my_file.write(RecentScores)
-
-
 def GetOptionChoice():
   OptionChoice=input('Select an option from the menu (or enter q to quit): ')
   return OptionChoice
@@ -143,21 +150,7 @@ def BubbleSortScores(RecentScores):
         RecentScores[element+1]=temp
   return RecentScores
         
-      
-##  unsorted=True
-##  length= len(RecentScores) -1
-##  while unsorted:
-##    for element in range(len(RecentScores)):
-##      unsorted=False
-##      if RecentScores[count]>RecentScores[count+1]:
-##        temp=RecentScores[count+1]
-##        RecentScores[count+1]=RecentScores[count]
-##        RecentScores[count]= temp
-##        print RecentScores              
-##      else:
-##        unsorted=True
-    
-      
+          
       
 def LoadDeck(Deck):
   global AceRank
@@ -288,6 +281,7 @@ def UpdateRecentScores(RecentScores, Score):
       Count = NO_OF_RECENT_SCORES
     RecentScores[Count].Name = PlayerName
     RecentScores[Count].Score = Score
+    RecentScores[Count].Date= date.today()
 
             
 def PlayGame(Deck, RecentScores):
