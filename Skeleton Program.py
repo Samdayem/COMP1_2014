@@ -113,7 +113,8 @@ def DisplayOptions():
 
   
 def GetOptionChoice():
-  OptionChoice=input('Select an option from the menu (or enter q to quit): ')
+  OptionChoice=input('Select an option from the menu (or enter q to quit): ').lower()
+  OptionChoice=OptionChoice[0]
   return OptionChoice
 
 def SetOptions(OptionChoice):
