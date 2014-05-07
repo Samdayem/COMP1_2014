@@ -101,9 +101,6 @@ def SaveScores(RecentScores,):
       my_file.write(str(RecentScores[count].Score)+"\n")
     
       
-    
-##    for RecentScore in RecentScores:
-##      my_file.write(RecentScores)
 
 def DisplayOptions():
   print('OPTIONS MENU')
