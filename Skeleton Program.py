@@ -81,6 +81,7 @@ def DisplayMenu():
   print('4. Reset recent scores')
   print('5. Options')
   print('6. Save high scores')
+  print('7. Load high scores')
   print()
   print('Select an option from the menu (or enter q to quit): ', end='')
 
@@ -96,9 +97,22 @@ def SaveScores(RecentScores,):
   Count=1
   with open('save_scores.txt',mode='w', encoding='utf-8')as my_file:
     for count in range(1,len(RecentScores)):
-      my_file.write(str(RecentScores[count].Date)+"\n")
-      my_file.write(RecentScores[count].Name)+"\n"
-      my_file.write(str(RecentScores[count].Score)+"\n")
+      my_file.write("[0]\n".format(RecentScores[count].Date))
+      my_file.write("[0]\n".format(RecentScores[count].Name))
+      my_file.write("[0]\n".format(RecentScores[count].Score))
+      print()
+      print("Save completed")
+
+def LoadScores():
+  RecentScores=[" "]
+  with open("save_scores.txt",mode="r",encoding="utf-8") as my_file:
+    for count in range(1,NO_OF_RECENT_SCORES+1):
+      ScoreRecord=TRecentScore()
+      ScoreRecord.Name=Score.readline().rstrip("\n")
+      ScoreRecord.Date=Score.readline().rstrip("\n")
+      ScoreRecord.Score=Score.readline().rstrip("\n")
+      return RecentScores
+      
     
       
 
@@ -338,3 +352,8 @@ if __name__ == '__main__':
       SetOptions(OptionChoice)
     elif Choice == '6':
       SaveScores(RecentScores)
+    elif Choice == '7':
+      try:
+        LoadScores()
+      except IOError:
+        SaveScores(RecentScores)
