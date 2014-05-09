@@ -22,7 +22,7 @@ class TRecentScore():
   def __init__(self):
     self.Name = ''
     self.Score = 0
-    self.Date=None
+    self.Date=" "
 
 Deck = [None]
 RecentScores = [None]
@@ -93,24 +93,24 @@ def GetMenuChoice():
   return Choice
 
 
-def SaveScores(RecentScores,):
+def SaveScores(RecentScores):
   Count=1
   with open('save_scores.txt',mode='w', encoding='utf-8')as my_file:
     for count in range(1,len(RecentScores)):
-      my_file.write("[0]\n".format(RecentScores[count].Date))
-      my_file.write("[0]\n".format(RecentScores[count].Name))
-      my_file.write("[0]\n".format(RecentScores[count].Score))
-      print()
-      print("Save completed")
+      my_file.write(str(RecentScores[count].Date)+"\n")
+      my_file.write((RecentScores[count].Name)+"\n")
+      my_file.write(str(RecentScores[count].Score)+"\n")
+
 
 def LoadScores():
   RecentScores=[" "]
   with open("save_scores.txt",mode="r",encoding="utf-8") as my_file:
     for count in range(1,NO_OF_RECENT_SCORES+1):
       ScoreRecord=TRecentScore()
-      ScoreRecord.Name=Score.readline().rstrip("\n")
-      ScoreRecord.Date=Score.readline().rstrip("\n")
-      ScoreRecord.Score=Score.readline().rstrip("\n")
+      ScoreRecord.Name=my_file.readline().rstrip("\n")
+      ScoreRecord.Date=my_file.readline().rstrip("\n")
+      ScoreRecord.Score=my_file.readline().rstrip("\n")
+      RecentScores.append(ScoreRecord)
       return RecentScores
       
     
@@ -258,7 +258,7 @@ def DisplayRecentScores(RecentScores):
   print()
   for Count in range(1, NO_OF_RECENT_SCORES + 1):
     if RecentScores[Count].Date!= None:
-      ScoreDate=RecentScores[Count].Date.strftime('%d/%m/%Y')
+      ScoreDate=(RecentScores[Count].Date.strftime('%d/%m/%Y')
     else:
       ScoreDate= 'N/A'
     print('{0:<12}{1:<10}{2:<5}'.format(ScoreDate,RecentScores[Count].Name,RecentScores[Count].Score))
@@ -268,6 +268,8 @@ def DisplayRecentScores(RecentScores):
   print()
 
 def UpdateRecentScores(RecentScores, Score):
+##  today=datetime.date.today()
+##  date=today.strftime("%d/%m/%Y")
   valid=False
   while not valid:
     Choice=input('Would you like to add the score to the high score list? (y or n): ')
@@ -354,6 +356,6 @@ if __name__ == '__main__':
       SaveScores(RecentScores)
     elif Choice == '7':
       try:
-        LoadScores()
+        RecentScores=LoadScores()
       except IOError:
         SaveScores(RecentScores)
