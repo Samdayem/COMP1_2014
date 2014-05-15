@@ -93,25 +93,59 @@ def GetMenuChoice():
   return Choice
 
 
+##def SaveScores(RecentScores):
+##  Count=1
+##  with open('save_scores.txt',mode='w', encoding='utf-8')as my_file:
+##    for count in range(1,len(RecentScores)):
+##      my_file.write(str(RecentScores[count].Date)+"\n")
+##      my_file.write((RecentScores[count].Name)+"\n")
+##      my_file.write(str(RecentScores[count].Score)+"\n")
+
 def SaveScores(RecentScores):
-  Count=1
-  with open('save_scores.txt',mode='w', encoding='utf-8')as my_file:
-    for count in range(1,len(RecentScores)):
-      my_file.write(str(RecentScores[count].Date)+"\n")
-      my_file.write((RecentScores[count].Name)+"\n")
-      my_file.write(str(RecentScores[count].Score)+"\n")
+  with open("save_scores.txt",mode="w",encoding="utf-8") as SaveFile:
+    for Score in RecentScores:
+      if Score != None:
+        if Score.Name != "":
+          SaveFile.write(Score.Date.strftime("%d/%m/%Y")+",")
+          SaveFile.write(Score.Name+",")
+          SaveFile.write(str(Score.Score)+"\n")
+
+
+##def LoadScores():
+##  RecentScores=[" "]
+##  with open("save_scores.txt",mode="r",encoding="utf-8") as my_file:
+##    for count in range(1,NO_OF_RECENT_SCORES+1):
+##      ScoreRecord=TRecentScore()
+##      ScoreRecord.Name=my_file.readline().rstrip("\n")
+##      ScoreRecord.Date=my_file.readline().rstrip("\n")
+##      ScoreRecord.Score=my_file.readline().rstrip("\n")
+##      RecentScores.append(ScoreRecord)
+##      return RecentScores
 
 
 def LoadScores():
-  RecentScores=[" "]
-  with open("save_scores.txt",mode="r",encoding="utf-8") as my_file:
-    for count in range(1,NO_OF_RECENT_SCORES+1):
-      ScoreRecord=TRecentScore()
-      ScoreRecord.Name=my_file.readline().rstrip("\n")
-      ScoreRecord.Date=my_file.readline().rstrip("\n")
-      ScoreRecord.Score=my_file.readline().rstrip("\n")
-      RecentScores.append(ScoreRecord)
-      return RecentScores
+  try:
+    with open("save_scores.txt",mode="r",encoding="utf-8") as LoadFile:
+      scores = LoadFile.read().splitlines()
+      for score in range(len(scores)):
+        temp = scores[score].split(",")
+        scores[score] = temp
+        ScoreDate = scores[score][0] #gets the date string
+        Day = ScoreDate[0:2]
+        Month = ScoreDate[3:5]
+        Year = ScoreDate[6:]
+        ScoreDate = date(int(Year),int(Month),int(Day))
+        scores[score][0] = ScoreDate
+      RecentScores = [None]
+      for score in scores:
+        NewScore = TRecentScore()
+        NewScore.Date = score[0]
+        NewScore.Name = score[1]
+        NewScore.Score = int(score[2])
+        RecentScores.append(NewScore)
+  except FileNotFoundError:
+    RecentScores = [None]
+  return RecentScores
       
     
       
@@ -258,7 +292,7 @@ def DisplayRecentScores(RecentScores):
   print()
   for Count in range(1, NO_OF_RECENT_SCORES + 1):
     if RecentScores[Count].Date!= None:
-      ScoreDate=(RecentScores[Count].Date.strftime('%d/%m/%Y')
+      ScoreDate=RecentScores[Count].Date.strftime('%d/%m/%Y')
     else:
       ScoreDate= 'N/A'
     print('{0:<12}{1:<10}{2:<5}'.format(ScoreDate,RecentScores[Count].Name,RecentScores[Count].Score))
@@ -268,8 +302,6 @@ def DisplayRecentScores(RecentScores):
   print()
 
 def UpdateRecentScores(RecentScores, Score):
-##  today=datetime.date.today()
-##  date=today.strftime("%d/%m/%Y")
   valid=False
   while not valid:
     Choice=input('Would you like to add the score to the high score list? (y or n): ')
